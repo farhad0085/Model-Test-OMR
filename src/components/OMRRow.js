@@ -28,12 +28,13 @@ const OMRRow = ({ number, disableRow, setAnsweredQuestions, setAnswers }) => {
             {option}
           </div>
         ))}
-        {disableRow && value && (
+        {disableRow && (
           <>
+            <div>&nbsp; | &nbsp;</div>
             <div
               className={`option ${
                 answer === "correct" ? "selected correct" : ""
-              }`}
+              } ${value ? "" : "disabled-option"}`}
               onClick={() => {
                 setAnswer("correct");
                 setAnswers((c) => ({ ...c, [number]: "correct" }));
@@ -42,7 +43,9 @@ const OMRRow = ({ number, disableRow, setAnsweredQuestions, setAnswers }) => {
               &#10003;
             </div>
             <div
-              className={`option ${answer === "wrong" ? "selected wrong" : ""}`}
+              className={`option ${
+                answer === "wrong" ? "selected wrong" : ""
+              } ${value ? "" : "disabled-option"}`}
               onClick={() => {
                 setAnswer("wrong");
                 setAnswers((w) => ({ ...w, [number]: "wrong" }));
