@@ -12,7 +12,8 @@ export default function OMRSheet({
   handleReload,
 }) {
   const [isTimeUp, setIsTimeUp] = useState(false);
-  const [answeredQuestions, setAnsweredQuestions] = useState(0)
+  const [answeredQuestions, setAnsweredQuestions] = useState(0);
+  const [answers, setAnswers] = useState({});
 
   const handleTimeout = (message) => {
     confirmAlert({
@@ -28,6 +29,13 @@ export default function OMRSheet({
       ],
     });
   };
+
+  const { correct: correctCount, wrong: wrongCount } = Object.values(
+    answers
+  ).reduce((acc, val) => {
+    acc[val] = (acc[val] || 0) + 1;
+    return acc;
+  }, {});
 
   function chunkArray(chunkSize) {
     const questions = Array.from(
@@ -52,6 +60,9 @@ export default function OMRSheet({
           numberOfQuestions={numberOfQuestions}
           answeredQuestions={answeredQuestions}
           remainingQuestions={numberOfQuestions - answeredQuestions}
+          correctAnswer={correctCount}
+          wrongAnswer={wrongCount}
+          negativeMark={negativeMark}
         />
       </div>
 
@@ -59,10 +70,11 @@ export default function OMRSheet({
         <form>
           <Row>
             {chunkArray(10).map((col, index) => (
-              <Col className="mb-4" md={2} sm={12}>
+              <Col className="mb-4" md={3} sm={12} key={index}>
                 {col.map((value) => (
                   <OMRRow
                     setAnsweredQuestions={setAnsweredQuestions}
+                    setAnswers={setAnswers}
                     disableRow={isTimeUp}
                     key={value}
                     number={value}

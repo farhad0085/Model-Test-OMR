@@ -7,6 +7,9 @@ export default function Timer({
   numberOfQuestions,
   answeredQuestions,
   remainingQuestions,
+  correctAnswer,
+  wrongAnswer,
+  negativeMark,
 }) {
   const [time, setTime] = useState(initialTime);
   const [isFinished, setIsFinished] = useState(false);
@@ -38,13 +41,15 @@ export default function Timer({
       <p style={{ marginBottom: 0 }}>A: {answeredQuestions}</p>
       <p style={{ marginBottom: 0 }}>R: {remainingQuestions}</p>
 
-      {/* {(isFinished || time === 0) && (
+      {(isFinished || time === 0) && (
         <>
-          <p style={{ marginBottom: 0 }}>C: {numberOfQuestions}</p>
-          <p style={{ marginBottom: 0 }}>W: {answeredQuestions}</p>
-          <p style={{ marginBottom: 0 }}>M: {remainingQuestions}</p>
+          <p style={{ marginBottom: 0 }}>C: {correctAnswer}</p>
+          <p style={{ marginBottom: 0 }}>W: {wrongAnswer}</p>
+          <p style={{ marginBottom: 0 }}>
+            M: {correctAnswer - wrongAnswer * negativeMark}
+          </p>
         </>
-      )} */}
+      )}
       <div>
         {!(isFinished || time === 0) && (
           <button

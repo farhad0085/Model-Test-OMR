@@ -30,6 +30,16 @@
   border-color: #007bff;
 }
 
+.option.selected.correct {
+    background-color: #00bb48;
+    border-color: #00bb48;
+}
+
+.option.selected.wrong {
+    background-color: #ff4800;
+    border-color: #ff4800;
+}
+
 .disabled-option {
   pointer-events: none;
 }
