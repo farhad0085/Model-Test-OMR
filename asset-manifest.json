@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Model-Test-OMR/static/css/main.f3708093.css",
-    "main.js": "/Model-Test-OMR/static/js/main.285b0ac6.js",
+    "main.js": "/Model-Test-OMR/static/js/main.6c789126.js",
     "index.html": "/Model-Test-OMR/index.html",
     "main.f3708093.css.map": "/Model-Test-OMR/static/css/main.f3708093.css.map",
-    "main.285b0ac6.js.map": "/Model-Test-OMR/static/js/main.285b0ac6.js.map"
+    "main.6c789126.js.map": "/Model-Test-OMR/static/js/main.6c789126.js.map"
   },
   "entrypoints": [
     "static/css/main.f3708093.css",
-    "static/js/main.285b0ac6.js"
+    "static/js/main.6c789126.js"
   ]
 }
