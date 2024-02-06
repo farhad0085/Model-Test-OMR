@@ -46,7 +46,7 @@ export default function Timer({
           <p style={{ marginBottom: 0 }}>C: {correctAnswer}</p>
           <p style={{ marginBottom: 0 }}>W: {wrongAnswer}</p>
           <p style={{ marginBottom: 0 }}>
-            M: {correctAnswer - wrongAnswer * negativeMark}
+            M: {(correctAnswer || 0) - (wrongAnswer || 0) * negativeMark}
           </p>
         </>
       )}
