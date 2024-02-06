@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const options = ["a", "b", "c", "d"];
 
-const OMRRow = ({ number, disableRow }) => {
+const OMRRow = ({ number, disableRow, setAnsweredQuestions }) => {
   const [isRowDisabled, setIsRowDisabled] = useState(false);
   const [value, setValue] = useState("");
 
@@ -18,6 +18,7 @@ const OMRRow = ({ number, disableRow }) => {
             className={`option ${value === option && "selected"}`}
             onClick={() => {
               setIsRowDisabled(true);
+              setAnsweredQuestions(answeredQuestions => answeredQuestions + 1)
               setValue(option);
             }}
           >

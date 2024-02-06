@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 
-export default function Timer({ initialTime, onTimeout, handleReload }) {
+export default function Timer({
+  initialTime,
+  onTimeout,
+  handleReload,
+  numberOfQuestions,
+  answeredQuestions,
+  remainingQuestions,
+}) {
   const [time, setTime] = useState(initialTime);
+  const [isFinished, setIsFinished] = useState(false);
 
   React.useEffect(() => {
     if (time <= 0) {
-      onTimeout();
+      onTimeout(isFinished ? "You've submitted the sheet." : null);
     } else {
       const intervalId = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
@@ -24,11 +32,36 @@ export default function Timer({ initialTime, onTimeout, handleReload }) {
   };
 
   return (
-    <div className="mt-3 d-flex justify-content-between align-items-center">
+    <div className="d-flex justify-content-between align-items-center">
       <h2>{formatTime(time)}</h2>
-      <button type="button" className="btn btn-primary" onClick={handleReload}>
-        Reload
-      </button>
+      <p style={{ marginBottom: 0 }}>T: {numberOfQuestions}</p>
+      <p style={{ marginBottom: 0 }}>A: {answeredQuestions}</p>
+      <p style={{ marginBottom: 0 }}>R: {remainingQuestions}</p>
+
+      {/* {(isFinished || time === 0) && (
+        <>
+          <p style={{ marginBottom: 0 }}>C: {numberOfQuestions}</p>
+          <p style={{ marginBottom: 0 }}>W: {answeredQuestions}</p>
+          <p style={{ marginBottom: 0 }}>M: {remainingQuestions}</p>
+        </>
+      )} */}
+      <div>
+        {!(isFinished || time === 0) && (
+          <button
+            type="button"
+            className="btn btn-success mx-2"
+            onClick={() => {
+              setTime(0);
+              setIsFinished(true);
+            }}
+          >
+            Finish
+          </button>
+        )}
+        <button type="button" className="btn btn-danger" onClick={handleReload}>
+          Reload
+        </button>
+      </div>
     </div>
   );
 }

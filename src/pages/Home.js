@@ -7,6 +7,7 @@ const Home = () => {
   const [minutes, setMinutes] = useState("10");
   const [seconds, setSeconds] = useState("0");
   const [showOMR, setShowOMR] = useState(false);
+  const [negativeMark, setNegativeMark] = useState("0.5")
 
   const handleStart = () => {
     if (numberOfQuestions && minutes && seconds) {
@@ -29,6 +30,7 @@ const Home = () => {
         <div>
           <OMRSheet
             numberOfQuestions={parseInt(numberOfQuestions)}
+            negativeMark={negativeMark}
             minutes={minutes}
             seconds={seconds}
             handleReload={handleReload}
@@ -38,7 +40,7 @@ const Home = () => {
         <div>
           <h1 className="mt-3">OMR Sheet App</h1>
           <div className="row mt-3">
-            <div className="col-md-4">
+            <div className="col-md-3">
               <label htmlFor="numberOfQuestions" className="form-label">
                 Number of Questions:
               </label>
@@ -50,7 +52,19 @@ const Home = () => {
                 onChange={(e) => setNumberOfQuestions(e.target.value)}
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
+              <label htmlFor="numberOfQuestions" className="form-label">
+                Negative Mark Per Question:
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="negativeMark"
+                value={negativeMark}
+                onChange={(e) => setNegativeMark(e.target.value)}
+              />
+            </div>
+            <div className="col-md-3">
               <label htmlFor="minutes" className="form-label">
                 Minutes:
               </label>
@@ -62,7 +76,7 @@ const Home = () => {
                 onChange={(e) => setMinutes(e.target.value)}
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <label htmlFor="seconds" className="form-label">
                 Seconds:
               </label>

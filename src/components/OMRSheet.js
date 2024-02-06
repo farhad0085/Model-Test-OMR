@@ -8,13 +8,15 @@ export default function OMRSheet({
   numberOfQuestions,
   minutes,
   seconds,
+  negativeMark,
   handleReload,
 }) {
   const [isTimeUp, setIsTimeUp] = useState(false);
+  const [answeredQuestions, setAnsweredQuestions] = useState(0)
 
-  const handleTimeout = () => {
+  const handleTimeout = (message) => {
     confirmAlert({
-      title: "Time's up!",
+      title: message || "Time's up!",
       message: "",
       buttons: [
         {
@@ -41,12 +43,17 @@ export default function OMRSheet({
   }
 
   return (
-    <div>
-      <Timer
-        initialTime={parseInt(minutes) * 60 + parseInt(seconds)}
-        onTimeout={handleTimeout}
-        handleReload={handleReload}
-      />
+    <div style={{ position: "relative" }}>
+      <div className="timerWrapper">
+        <Timer
+          initialTime={parseInt(minutes) * 60 + parseInt(seconds)}
+          onTimeout={handleTimeout}
+          handleReload={handleReload}
+          numberOfQuestions={numberOfQuestions}
+          answeredQuestions={answeredQuestions}
+          remainingQuestions={numberOfQuestions - answeredQuestions}
+        />
+      </div>
 
       <div className="mt-3">
         <form>
@@ -54,7 +61,12 @@ export default function OMRSheet({
             {chunkArray(10).map((col, index) => (
               <Col className="mb-4" md={2} sm={12}>
                 {col.map((value) => (
-                  <OMRRow disableRow={isTimeUp} key={value} number={value} />
+                  <OMRRow
+                    setAnsweredQuestions={setAnsweredQuestions}
+                    disableRow={isTimeUp}
+                    key={value}
+                    number={value}
+                  />
                 ))}
               </Col>
             ))}
